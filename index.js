@@ -13,7 +13,7 @@ function DangerAlert (intervalMin, callback) {
 
   let timer = null;
   let server = null;
-  this.start = function() {
+  this.start = function(port) {
     this.stop();
     lastMessageDate = new Date();
     timer = setInterval(function() {
@@ -22,7 +22,7 @@ function DangerAlert (intervalMin, callback) {
         callback();
       }
     }, 1000 * 60 * intervalMin);
-    server = app.listen(3000);
+    server = app.listen(port);
   }
   this.stop = function() {
     if (timer !== null) {
