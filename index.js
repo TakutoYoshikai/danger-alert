@@ -3,6 +3,7 @@ function DangerAlert (intervalMin, callback) {
   const app = express();
 
   let lastMessageDate = null;
+  let safeCallback = null;
 
   app.get("/safe", function(req, res) {
     lastMessageDate = new Date();
@@ -13,6 +14,9 @@ function DangerAlert (intervalMin, callback) {
 
   let timer = null;
   let server = null;
+  this.safe = function(_callback) {
+    safeCallback = _callback;
+  }
   this.start = function(port) {
     this.stop();
     lastMessageDate = new Date();
@@ -20,6 +24,8 @@ function DangerAlert (intervalMin, callback) {
       const now = new Date();
       if ((now - lastMessageDate) / (1000 * 60) > intervalMin) {
         callback();
+      } else {
+        safeCallback();
       }
     }, 1000 * 60 * intervalMin);
     server = app.listen(port);
