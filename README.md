@@ -11,8 +11,14 @@ npm install TakutoYoshikai/danger-alert
 const DangerAlert = require("danger-alert");
 
 //Interval of checking connection is 15 minutes.
-const server = new DangerAlert(15, function() {
+const server = new DangerAlert(15);
+
+server.danger(function() {
   //When your devise disconnects from the Internet.
+});
+
+server.safe(function() {
+  //When your devise's connection to the Internet is not closed.
 });
 
 server.start(3000); // It starts server on 3000 port.
