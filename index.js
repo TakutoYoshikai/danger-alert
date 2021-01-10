@@ -27,9 +27,13 @@ function DangerAlert (intervalMin) {
     timer = setInterval(function() {
       const now = new Date();
       if ((now - lastMessageDate) / (1000 * 60) > intervalMin) {
-        dangerCallback();
+        if (dangerCallback) {
+          dangerCallback();
+        }
       } else {
-        safeCallback();
+        if (safeCallback) {
+          safeCallback();
+        }
       }
     }, 1000 * 60 * intervalMin);
     server = app.listen(port);
