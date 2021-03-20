@@ -1,5 +1,6 @@
 # danger-alert
 This is a server side library to do any action when your devise disconnects from the Internet.
+Please send request to /safe at the interval.
 
 ### Usage
 **install**
